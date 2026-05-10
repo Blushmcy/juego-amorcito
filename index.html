@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<title>Feliz cumpleaños ❤️</title>
+
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
+
+body {
+  margin: 0;
+  font-family: 'Press Start 2P', cursive;
+  background: url("fondo.png") no-repeat center center fixed;
+  background-size: cover;
+  color: white;
+  text-align: center;
+  overflow-x: hidden;
+}
+
+/* Oscurecer fondo */
+body::before {
+  content: "";
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  background: rgba(0,0,0,0.4);
+  z-index: -1;
+}
+
+/* Título */
+h1 {
+  margin-top: 30px;
+  font-size: 14px;
+  background: #8B5A2B;
+  padding: 15px;
+  border: 4px solid #5a3b1a;
+  display: inline-block;
+}
+
+/* Tarjetas */
+.card {
+  margin: 20px auto;
+  padding: 20px;
+  max-width: 500px;
+  background: #f5e6c8;
+  border: 4px solid #5a3b1a;
+  box-shadow: 5px 5px 0 black;
+  color: black;
+}
+
+/* Botones */
+button {
+  padding: 15px;
+  margin: 10px;
+  border: 3px solid black;
+  background: #6bd66b;
+  font-size: 10px;
+  cursor: pointer;
+  box-shadow: 3px 3px 0 black;
+  animation: bounce 1.5s infinite;
+}
+
+button:hover {
+  transform: scale(1.1);
+}
+
+/* Animación botones */
+@keyframes bounce {
+  0%,100% { transform: translateY(0); }
+  50% { transform: translateY(-5px); }
+}
+
+/* Dino */
+.dino {
+  width: 120px;
+  image-rendering: pixelated;
+}
+
+/* Burbuja de diálogo */
+.bubble {
+  background: white;
+  color: black;
+  padding: 10px;
+  border: 3px solid black;
+  display: inline-block;
+  margin-bottom: 10px;
+  animation: float 2s infinite;
+}
+
+@keyframes float {
+  0%,100% { transform: translateY(0); }
+  50% { transform: translateY(-8px); }
+}
+
+.hidden { display: none; }
+
+/* Corazones cayendo */
+.heart {
+  position: fixed;
+  top: -10px;
+  font-size: 20px;
+  animation: fall linear forwards;
+}
+
+@keyframes fall {
+  to {
+    transform: translateY(100vh);
+    opacity: 0;
+  }
+}
+
+.final {
+  background: #d4f7d4;
+}
+</style>
+
+</head>
+<body>
+
+<!-- 🎵 Música -->
+<audio id="music" autoplay loop>
+  <source src="https://cdn.pixabay.com/audio/2022/03/15/audio_c8c8a73467.mp3" type="audio/mpeg">
+</audio>
+
+<h1>🌿 FELIZ CUMPLEAÑOS MI AMORCITO 🌿</h1>
+
+<div class="game-container">
+
+<div id="nivel1" class="card">
+  <div class="bubble">Hola... tengo algo importante 🥺</div><br>
+  <img src="https://i.imgur.com/6X12F3B.png" class="dino">
+  <p>🎮 Nivel 1</p>
+  <p>¿Qué eres para mí?</p>
+  <button onclick="correcto1()">Mi todo 💕</button>
+  <button onclick="incorrecto()">Un npc 🤨</button>
+</div>
+
+<div id="nivel2" class="card hidden">
+  <div class="bubble">Ok ok… siguiente nivel 😳</div><br>
+  <img src="https://i.imgur.com/6X12F3B.png" class="dino">
+  <p>🍄 Nivel 2</p>
+  <p>¿Quién es mi persona favorita?</p>
+  <button onclick="correcto2()">Tú 💖</button>
+  <button onclick="incorrecto()">Otro 😡</button>
+</div>
+
+<div id="nivel3" class="card hidden">
+  <div class="bubble">Última misión… 😳💘</div><br>
+  <img src="https://i.imgur.com/6X12F3B.png" class="dino">
+  <p>🌸 Nivel 3</p>
+  <button onclick="final()">Abrir cofre 🎁</button>
+</div>
+
+<div id="mensajeError"></div>
+
+<div id="final" class="card final hidden">
+  <h2>🎉 FELIZ CUMPLEAÑOS 🎉</h2>
+  <p>Has completado el juego 💘</p>
+
+  <div class="card">
+    <h2>Carta para John</h2>
+    <p>
+    Hoy es un día demasiado especial porque naciste tú... ❤️
+    </p>
+  </div>
+</div>
+
+</div>
+
+<script>
+function correcto1() {
+  nivel1.classList.add("hidden");
+  nivel2.classList.remove("hidden");
+}
+
+function correcto2() {
+  nivel2.classList.add("hidden");
+  nivel3.classList.remove("hidden");
+}
+
+function incorrecto() {
+  mensajeError.innerHTML = "❌ Intenta otra vez";
+}
+
+function final() {
+  nivel3.classList.add("hidden");
+  finalDiv.classList.remove("hidden");
+  lluviaCorazones();
+}
+
+/* corazones */
+function lluviaCorazones() {
+  setInterval(() => {
+    const heart = document.createElement("div");
+    heart.classList.add("heart");
+    heart.innerHTML = "💖";
+    heart.style.left = Math.random() * 100 + "vw";
+    heart.style.animationDuration = (Math.random()*2+3)+"s";
+    document.body.appendChild(heart);
+
+    setTimeout(() => heart.remove(), 5000);
+  }, 200);
+}
+
+/* fix ids */
+const nivel1 = document.getElementById("nivel1");
+const nivel2 = document.getElementById("nivel2");
+const nivel3 = document.getElementById("nivel3");
+const finalDiv = document.getElementById("final");
+const mensajeError = document.getElementById("mensajeError");
+</script>
+
+</body>
+</html>
