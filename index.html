@@ -242,24 +242,13 @@ function lluvia(){
     let h = document.createElement("div");
     h.className = "heart";
     h.innerHTML = "💖";
-
-    // 🔥 posición REAL en pantalla (no vw)
     h.style.left = Math.random() * document.documentElement.clientWidth + "px";
-
-    // 🔥 empieza arriba SIEMPRE
     h.style.top = "-30px";
-
-    // velocidad random
     h.style.animationDuration = (Math.random() * 3 + 2) + "s";
-
-    // movimiento horizontal suave random (evita “línea”)
     h.style.transform = `translateX(${Math.random()*60 - 30}px)`;
-
     document.body.appendChild(h);
-
     setTimeout(()=>h.remove(),6000);
   },150);
-}
 }
 /* 🌅 DIA/NOCHE */
 let day=true;
