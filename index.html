@@ -148,8 +148,12 @@ button:hover{
   animation:fall linear forwards;
 }
 
-@keyframes subir{
-  to{transform:translateY(-110vh);}
+@keyframes fall{
+  from{
+    transform:translateY(0);
+  }
+  to{
+    transform:translateY(110vh);
 }
 
 .hidden{display:none;}
@@ -239,16 +243,15 @@ function finaljuego(){
 
 function lluvia(){
   setInterval(()=>{
-    let h = document.createElement("div");
+    const h = document.createElement("div");
     h.className = "heart";
     h.innerHTML = "💖";
-    h.style.left = Math.random() * document.documentElement.clientWidth + "px";
+    h.style.left = Math.random() * window.innerWidth + "px";
     h.style.top = "-30px";
-    h.style.animationDuration = (Math.random() * 3 + 2) + "s";
-    h.style.transform = `translateX(${Math.random()*60 - 30}px)`;
+    h.style.animation = `fall ${2 + Math.random()*3}s linear forwards`;
     document.body.appendChild(h);
     setTimeout(()=>h.remove(),6000);
-  },150);
+  },120);
 }
 /* 🌅 DIA/NOCHE */
 let day=true;
