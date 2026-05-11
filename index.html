@@ -228,18 +228,22 @@ function incorrecto(){
 alert("❌ intenta otra vez");
 }
 
-function finalJuego(){
-nivel3.classList.add("hidden");
-final.classList.remove("hidden");
+function final(){
+  document.getElementById("nivel3").classList.add("hidden");
+  document.getElementById("final").classList.remove("hidden");
+  lluvia();
+}
 
-setInterval(()=>{
-let h=document.createElement("div");
-h.className="heart";
-h.innerText="❤️";
-h.style.left=Math.random()*100+"vw";
-h.style.animationDuration=(Math.random()*2+3)+"s";
-document.body.appendChild(h);
-},300);
+function lluvia(){
+  setInterval(()=>{
+    let h=document.createElement("div");
+    h.className="heart";
+    h.innerHTML="💖";
+    h.style.left=Math.random()*100+"vw";
+    h.style.animationDuration=(Math.random()*2+3)+"s";
+    document.body.appendChild(h);
+    setTimeout(()=>h.remove(),5000);
+  },200);
 }
 
 /* 🌅 DIA/NOCHE */
