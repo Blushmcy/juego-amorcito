@@ -2,216 +2,262 @@
 <html lang="es">
 <head>
 <meta charset="UTF-8">
-<title>Feliz cumpleaños ❤️</title>
+<title>Modo Leyenda 🎮</title>
 
 <style>
+@import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
 
-body {
-  margin: 0;
-  font-family: 'Press Start 2P', cursive;
-  background: url("fondo.png") no-repeat center center fixed;
-  background-size: cover;
-  color: white;
-  text-align: center;
-  overflow-x: hidden;
+body{
+  margin:0;
+  font-family:'Press Start 2P';
+  overflow-x:hidden;
+  color:white;
+  text-align:center;
 }
 
-/* Oscurecer fondo */
-body::before {
-  content: "";
-  position: fixed;
-  width: 100%;
-  height: 100%;
-  background: rgba(0,0,0,0.4);
-  z-index: -1;
+/* 🌅 CIELO */
+.sky{
+  position:fixed;
+  width:100%;
+  height:100%;
+  background:linear-gradient(#5fb3ff,#aee1ff);
+  transition:1s;
+  z-index:-10;
 }
 
-/* Título */
-h1 {
-  margin-top: 30px;
-  font-size: 14px;
-  background: #8B5A2B;
-  padding: 15px;
-  border: 4px solid #5a3b1a;
-  display: inline-block;
+.night{
+  background:linear-gradient(#0b1a3a,#1e3c72);
 }
 
-/* Tarjetas */
-.card {
-  margin: 20px auto;
-  padding: 20px;
-  max-width: 500px;
-  background: #f5e6c8;
-  border: 4px solid #5a3b1a;
-  box-shadow: 5px 5px 0 black;
-  color: black;
+/* ⭐ ESTRELLAS */
+.star{
+  position:fixed;
+  width:3px;
+  height:3px;
+  background:white;
+  border-radius:50%;
+  opacity:0;
+  animation:twinkle 2s infinite alternate;
 }
 
-/* Botones */
-button {
-  padding: 15px;
-  margin: 10px;
-  border: 3px solid black;
-  background: #6bd66b;
-  font-size: 10px;
-  cursor: pointer;
-  box-shadow: 3px 3px 0 black;
-  animation: bounce 1.5s infinite;
+@keyframes twinkle{
+  from{opacity:0;}
+  to{opacity:1;}
 }
 
-button:hover {
-  transform: scale(1.1);
+/* 🌿 SUELO */
+.ground{
+  position:fixed;
+  bottom:0;
+  width:100%;
+  height:30%;
+  background:linear-gradient(#2ecc71 20%,#3e8e41 20%);
+  z-index:-5;
 }
 
-/* Animación botones */
-@keyframes bounce {
-  0%,100% { transform: translateY(0); }
-  50% { transform: translateY(-5px); }
+/* 🌳 ÁRBOLES */
+.tree{
+  position:fixed;
+  bottom:30%;
+  width:40px;
+  height:60px;
+  background:#8B5A2B;
+}
+.tree::after{
+  content:"";
+  position:absolute;
+  width:80px;
+  height:60px;
+  left:-20px;
+  bottom:40px;
+  background:#2ecc71;
 }
 
-/* Dino */
-.dino {
-  width: 120px;
-  image-rendering: pixelated;
+/* 🟨 TITULO */
+h1{
+  margin-top:30px;
+  color:#ffcc00;
+  text-shadow:4px 4px #000,6px 6px #000;
 }
 
-/* Burbuja de diálogo */
-.bubble {
-  background: white;
-  color: black;
-  padding: 10px;
-  border: 3px solid black;
-  display: inline-block;
-  margin-bottom: 10px;
-  animation: float 2s infinite;
+/* 🎮 BOTONES */
+button{
+  font-family:inherit;
+  background:#7a7a7a;
+  border:4px solid #3a3a3a;
+  color:white;
+  padding:10px;
+  margin:10px;
+  cursor:pointer;
+}
+button:hover{
+  background:#9a9a9a;
 }
 
-@keyframes float {
-  0%,100% { transform: translateY(0); }
-  50% { transform: translateY(-8px); }
+/* 📦 CARTAS */
+.card{
+  background:rgba(0,0,0,0.85);
+  padding:20px;
+  margin:20px auto;
+  max-width:500px;
+  border-radius:10px;
 }
 
-.hidden { display: none; }
-
-/* Corazones cayendo */
-.heart {
-  position: fixed;
-  top: -10px;
-  font-size: 20px;
-  animation: fall linear forwards;
+/* 🦖 DINO EMOJI */
+.dino{
+  position:fixed;
+  bottom:0;
+  left:40px;
+  font-size:40px;
+  animation:idle 1s infinite alternate;
 }
 
-@keyframes fall {
-  to {
-    transform: translateY(100vh);
-    opacity: 0;
-  }
+@keyframes idle{
+  from{transform:translateY(0);}
+  to{transform:translateY(-8px);}
 }
 
-.final {
-  background: #d4f7d4;
+/* 🐰 CONEJO EMOJI */
+.rabbit{
+  position:fixed;
+  bottom:30%;
+  left:20%;
+  font-size:35px;
+  transition:0.3s;
+  animation:jump 0.6s infinite;
 }
+
+@keyframes jump{
+  0%,100%{transform:translateY(0);}
+  50%{transform:translateY(-20px);}
+}
+
+/* ❤️ CORAZONES */
+.heart{
+  position:fixed;
+  bottom:-10px;
+  animation:subir linear forwards;
+}
+
+@keyframes subir{
+  to{transform:translateY(-110vh);}
+}
+
+.hidden{display:none;}
+
 </style>
-
 </head>
+
 <body>
 
-<!-- 🎵 Música -->
-<audio id="music" autoplay loop>
-  <source src="https://cdn.pixabay.com/audio/2022/03/15/audio_c8c8a73467.mp3" type="audio/mpeg">
-</audio>
+<div class="sky" id="sky"></div>
+<div class="ground"></div>
+
+<div class="tree" style="left:10%"></div>
+<div class="tree" style="left:40%"></div>
+<div class="tree" style="left:70%"></div>
+
+<div class="dino" id="dino">🦖</div>
+<div class="rabbit" id="rabbit">🐰</div>
 
 <h1>🌿 FELIZ CUMPLEAÑOS MI AMORCITO 🌿</h1>
 
-<div class="game-container">
-
 <div id="nivel1" class="card">
-  <div class="bubble">Hola... tengo algo importante 🥺</div><br>
-  <img src="https://i.imgur.com/6X12F3B.png" class="dino">
-  <p>🎮 Nivel 1</p>
-  <p>¿Qué eres para mí?</p>
-  <button onclick="correcto1()">Mi todo 💕</button>
-  <button onclick="incorrecto()">Un ctm 🤨</button>
+<p>🎮 Nivel 1</p>
+<p>¿Qué eres para mí?</p>
+<button onclick="correcto1()">Mi todo 💕</button>
+<button onclick="incorrecto()">Un npc 🤨</button>
 </div>
 
 <div id="nivel2" class="card hidden">
-  <div class="bubble">Ok ok… siguiente nivel 😳</div><br>
-  <img src="https://i.imgur.com/6X12F3B.png" class="dino">
-  <p>🍄 Nivel 2</p>
-  <p>¿Quién es mi persona favorita?</p>
-  <button onclick="correcto2()">Tú 💖</button>
-  <button onclick="incorrecto()">Otro 😡</button>
+<p>🍄 Nivel 2</p>
+<p>¿Quién es mi persona favorita?</p>
+<button onclick="correcto2()">Tú 💖</button>
+<button onclick="incorrecto()">Otro 😡</button>
 </div>
 
 <div id="nivel3" class="card hidden">
-  <div class="bubble">Última misión… 😳💘</div><br>
-  <img src="https://i.imgur.com/6X12F3B.png" class="dino">
-  <p>🌸 Nivel 3</p>
-  <button onclick="final()">Abrir cofre 🎁</button>
+<p>🌸 Nivel 3</p>
+<button onclick="finalJuego()">Abrir 🎁</button>
 </div>
 
-<div id="mensajeError"></div>
+<div id="final" class="card hidden">
+<h2>🎉 FELIZ CUMPLEAÑOS JOHN 🎉</h2>
+<p>Has completado el juego 💘</p>
 
-<div id="final" class="card final hidden">
-  <h2>🎉 FELIZ CUMPLEAÑOS 🎉</h2>
-  <p>Has completado el juego 💘</p>
+<div class="card">
+<p style="line-height:1.6; font-size:10px;">
+Hoy es un día demasiado especial porque naciste tú, y sinceramente no puedo dejar pasar la oportunidad de decirte lo importante que eres para mí.  
+FELIZ CUMPLEAÑOS MI AMORCITO ❤️  
 
-  <div class="card">
-    <h2>Carta para John</h2>
-    <p>
-   Hoy es un día demasiado especial porque naciste tú, y sinceramente no puedo dejar pasar la oportunidad de decirte lo importante que eres para mí. FELIZ CUMPLEAÑOS MI AMORCITO ❤️
-      Espero que este día lo disfrutes muchísimo, que te rías, que la pases increíble y que sientas todo lo especial que eres, no solo hoy, sino siempre.
-      De verdad deseo que este nuevo año en tu vida venga lleno de cosas buenas, logros, momentos felices y sueños cumplidos. 
-      Quiero que sepas que para mí es una alegría enorme estar a tu lado. Me haces sentir bien, me haces reír y haces que todo sea más bonito.
-      Gracias por cada momento, por cada conversación y por simplemente ser tú. Espero poder seguir estando a tu lado en este cumpleaños y en muchos más, acompañándote, apoyándote y creando recuerdos juntos. 
-      Porque si algo tengo claro, es que quiero seguir compartiendo mi tiempo contigo.
-    </p>
-  </div>
+Espero que este día lo disfrutes muchísimo, que te rías, que la pases increíble y que sientas todo lo especial que eres, no solo hoy, sino siempre.  
+De verdad deseo que este nuevo año en tu vida venga lleno de cosas buenas, logros, momentos felices y sueños cumplidos.  
+
+Quiero que sepas que para mí es una alegría enorme estar a tu lado. Me haces sentir bien, me haces reír y haces que todo sea más bonito.  
+Gracias por cada momento, por cada conversación y por simplemente ser tú.  
+
+Espero poder seguir estando a tu lado en este cumpleaños y en muchos más, acompañándote, apoyándote y creando recuerdos juntos.  
+Porque si algo tengo claro, es que quiero seguir compartiendo mi tiempo contigo.  
+
+Te quiero muchísimo ❤️
+</p>
 </div>
-
 </div>
 
 <script>
-function correcto1() {
-  nivel1.classList.add("hidden");
-  nivel2.classList.remove("hidden");
+
+/* JUEGO */
+function correcto1(){
+nivel1.classList.add("hidden");
+nivel2.classList.remove("hidden");
 }
 
-function correcto2() {
-  nivel2.classList.add("hidden");
-  nivel3.classList.remove("hidden");
+function correcto2(){
+nivel2.classList.add("hidden");
+nivel3.classList.remove("hidden");
 }
 
-function incorrecto() {
-  mensajeError.innerHTML = "❌ Intenta otra vez";
+function incorrecto(){
+alert("❌ intenta otra vez");
 }
 
-function final() {
-  nivel3.classList.add("hidden");
-  finalDiv.classList.remove("hidden");
-  lluviaCorazones();
+function finalJuego(){
+nivel3.classList.add("hidden");
+final.classList.remove("hidden");
+
+setInterval(()=>{
+let h=document.createElement("div");
+h.className="heart";
+h.innerText="❤️";
+h.style.left=Math.random()*100+"vw";
+h.style.animationDuration=(Math.random()*2+3)+"s";
+document.body.appendChild(h);
+},300);
 }
 
-/* corazones */
-function lluviaCorazones() {
-  setInterval(() => {
-    const heart = document.createElement("div");
-    heart.classList.add("heart");
-    heart.innerHTML = "💖";
-    heart.style.left = Math.random() * 100 + "vw";
-    heart.style.animationDuration = (Math.random()*2+3)+"s";
-    document.body.appendChild(heart);
+/* 🌅 DIA/NOCHE */
+let day=true;
+setInterval(()=>{
+day=!day;
+sky.classList.toggle("night");
 
-    setTimeout(() => heart.remove(), 5000);
-  }, 200);
+if(!day){
+for(let i=0;i<40;i++){
+let s=document.createElement("div");
+s.className="star";
+s.style.left=Math.random()*100+"vw";
+s.style.top=Math.random()*50+"vh";
+document.body.appendChild(s);
 }
+}
+},8000);
 
-/* fix ids */
-const nivel1 = document.getElementById("nivel1");
-const nivel2 = document.getElementById("nivel2");
-const nivel3 = document.getElementById("nivel3");
-const finalDiv = document.getElementById("final");
-const mensajeError = document.getElementById("mensajeError");
+/* 🐰 IA CONEJO */
+setInterval(()=>{
+let rabbit=document.getElementById("rabbit");
+rabbit.style.left = Math.random()*80 + "%";
+},1200);
+
 </script>
 
 </body>
