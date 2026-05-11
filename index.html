@@ -141,8 +141,11 @@ button:hover{
 /* ❤️ CORAZONES */
 .heart{
   position:fixed;
-  bottom:-10px;
-  animation:subir linear forwards;
+  top:-30px;
+  left:0;
+  font-size:20px;
+  pointer-events:none;
+  animation:fall linear forwards;
 }
 
 @keyframes subir{
@@ -236,17 +239,26 @@ function finaljuego(){
 
 function lluvia(){
   setInterval(()=>{
-    let h=document.createElement("div");
-    h.className="heart";
-    h.innerHTML="💖";
+    let h = document.createElement("div");
+    h.className = "heart";
+    h.innerHTML = "💖";
 
-    h.style.left = Math.random() * window.innerWidth + "px";
-    h.style.animationDuration = (Math.random()*2+3)+"s";
+    // 🔥 posición REAL en pantalla (no vw)
+    h.style.left = Math.random() * document.documentElement.clientWidth + "px";
+
+    // 🔥 empieza arriba SIEMPRE
+    h.style.top = "-30px";
+
+    // velocidad random
+    h.style.animationDuration = (Math.random() * 3 + 2) + "s";
+
+    // movimiento horizontal suave random (evita “línea”)
+    h.style.transform = `translateX(${Math.random()*60 - 30}px)`;
 
     document.body.appendChild(h);
 
-    setTimeout(()=>h.remove(),5000);
-  },200);
+    setTimeout(()=>h.remove(),6000);
+  },150);
 }
 }
 /* 🌅 DIA/NOCHE */
