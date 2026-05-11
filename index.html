@@ -54,7 +54,10 @@ body{
   background:linear-gradient(#2ecc71 20%,#3e8e41 20%);
   z-index:-5;
 }
-
+.background{
+  position:fixed;
+  inset:0;
+  z-index:0;
 /* 🌳 ÁRBOLES */
 .tree{
   position:absolute;
@@ -62,7 +65,7 @@ body{
   width:40px;
   height:60px;
   background:#8B5A2B;
-    z-index:1;
+  z-index:1;
 }
 .tree::after{
   content:"";
@@ -72,7 +75,6 @@ body{
   left:-20px;
   bottom:40px;
   background:#2ecc71;
-  z-index:1;
 }
 
 /* 🟨 TITULO */
